@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Kahve İçelim mi?</title>
+</head>
+
+<style>
+body {
+	font-family: Arial;
+	background: #e8d7f3;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+.container {
+	text-align: center;
+}
+img {
+	width: 150px;
+}
+h1 {
+	margin-top: 20px;
+}
+.buttons {
+	margin-top: 30px;
+}
+button {
+	padding: 15px 30px;
+	font-size: 18px;
+	border: none;
+	border-radius: 25px;
+	cursor: pointer;
+	margin: 10px;
+	transition: 0.3s;
+}
+#yesBtn {
+	background: purple;
+	color: white;
+}
+#noBtn {
+	background: #999;
+	color: white;
+}
+.confetti {
+	position: fixed;
+	width: 10px;
+	height: 10px;
+	background: red;
+	top: -10px;
+	animation: fall 3s linear forwards;
+}
+#keyframes fall {
+to {
+transform: translateY(100vh) rotate(720deg);
+opacity: 0;
+}
+}
+</style>
+<body>
+<div class="container"> <img src="bear.jpg" alt="">
+  <h1 id="title">Kahve İçelim mi? ☕</h1>
+  <p id="text">tabii istersen</p>
+  <div class="buttons">
+    <button id="yesBtn">Evet</button>
+    <button id="noBtn">Hayır</button>
+  </div>
+</div>
+<script>
+		let noBtn = document.getElementById("noBtn")
+		let yesBtn = document.getElementById("yesBtn")
+		let text = document.getElementById("text")
+		let title = document.getElementById("title")
+		
+		let scale = 1
+		let sayac = 0
+		
+		let mesajlar = [
+			"Emin misin?",
+			"Bir daha düşün 😅",
+			"Kahve çok güzel olur ☕",
+			"Hadi ama 😄"
+		]
+		
+		/*hayır butomnu kaçma*/
+//		noBtn.addEventListener("mouseover", function(){
+//			let x = Math.random()*300 -150
+//			let y = Math.random()*200 -100
+//			
+//			noBtn.style.transform = `translate(${x}px,${y}px)`
+//		})
+		
+		
+		/*hayır basınca*/
+		noBtn.addEventListener("click", function(){
+			scale += 0.3
+			yesBtn.style.transform = `scale(${scale})`
+			text.textContent = mesajlar[sayac % mesajlar.length]
+			
+			sayac++
+		})
+		
+		/*evet basınca*/
+		yesBtn.addEventListener("click", function(){
+			title.textContent = "Süper! Artık detayları konuşabiliriz? ☕"
+			text.textContent = "Kahve zamanı!"
+			
+			confettiOlustur()
+		})
+		
+		/*konfeti*/
+		function confettiOlustur(){
+			for(let i = 0; i < 80; i++){
+				let confetti = document.createElement("div")
+				confetti.classList.add("confetti")
+				confetti.style.left = Math.random()*100 + "vw"
+				confetti.style.background = `hsl(${Math.random()*360},100%,50%)`
+				document.body.appendChild(confetti)
+				
+				setTimeout (()=>{
+					confetti.remove()
+				}, 3000)
+			}
+		}
+		
+		
+		
+		
+		
+	</script>
+</body>
+</html>
